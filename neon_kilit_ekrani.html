@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#050707">
 <title>Neon Kilit Ekranı</title>
 <style>
-:root{--green:#00ff67;--cyan:#00c8ff;--orange:#ff8b22;--bg:#030505}
+:root{--green:#00ff67;--glow:#00ff6733;--glow2:#00ff5730;--line2:#00d6ff;--cyan:#00c8ff;--csz:1;--rsz:1;--orange:#ff8b22;--bg:#030505}
 *{box-sizing:border-box}
 body{margin:0;min-height:100vh;background:#101414;color:#fff;font-family:Arial,Helvetica,sans-serif;display:grid;place-items:center;padding:12px}
 .phone{width:min(100%,410px);min-height:min(860px,96vh);border:3px solid #343a3a;border-radius:38px;background:radial-gradient(ellipse at 75% 15%,#07130c 0,transparent 28%),linear-gradient(#020303,#050707 65%,#000);box-shadow:0 0 0 3px #090b0b,0 18px 55px #000;position:relative;overflow:hidden;padding:24px 20px 42px}
@@ -18,7 +18,7 @@ body{margin:0;min-height:100vh;background:#101414;color:#fff;font-family:Arial,H
 .orange{color:var(--orange)}.blue{color:var(--cyan)}
 .date{font-size:14px;color:#ddd;white-space:nowrap;margin-top:2px}
 .date span{color:#20d9c6}
-.clock{width:100%;max-width:190px;aspect-ratio:1;border-radius:50%;border:2px solid #59605e;position:relative;margin:auto;background:radial-gradient(circle,#050707 60%,#101615 61%,#000 70%);box-shadow:0 0 15px #101a14}
+.clock{width:100%;max-width:calc(190px*var(--csz));aspect-ratio:1;border-radius:50%;border:2px solid #59605e;position:relative;margin:auto;background:radial-gradient(circle,#050707 60%,#101615 61%,#000 70%);box-shadow:0 0 15px #101a14}
 .ring{position:absolute;inset:-7px;border-radius:50%;background:conic-gradient(from -8deg,#00ff53 0 75deg,#222 75deg 93deg,#f7d82e 93deg 145deg,#ff8d22 145deg 190deg,#ff2b2b 190deg 245deg,#282828 245deg 270deg,#00ff53 270deg 360deg);z-index:0;mask:radial-gradient(farthest-side,transparent calc(100% - 8px),#000 calc(100% - 7px))}
 .clock:before{content:"";position:absolute;inset:8px;border-radius:50%;border:1px solid #555}
 .num{position:absolute;font-size:14px;font-weight:bold;transform:translate(-50%,-50%)}
@@ -26,28 +26,47 @@ body{margin:0;min-height:100vh;background:#101414;color:#fff;font-family:Arial,H
 .hour{height:28%;width:4px;background:#e8fff2;box-shadow:0 0 3px var(--green)}
 .minute{height:37%;width:3px;background:#e8fff2;box-shadow:0 0 4px var(--green)}
 .second{height:42%;width:1px;background:#ff334b}
-.pin{position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:50%;background:#111;border:3px solid #65ffa3;transform:translate(-50%,-50%);z-index:4}
-.runner{height:95px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;position:relative;margin-top:4px}
-.runner:before{content:"";position:absolute;left:18%;right:16%;height:45px;border-top:2px solid #00ffb0;border-radius:50%;transform:rotate(-17deg);filter:drop-shadow(0 0 5px #00ff9d)}
-.runner:after{content:"";position:absolute;left:22%;right:12%;height:30px;border-top:2px solid #00d6ff;border-radius:50%;transform:rotate(-17deg);opacity:.7}
-.runner span{font-size:65px;position:relative;z-index:1;filter:drop-shadow(0 0 8px #00ff89)}
+.pin{position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:50%;background:#111;border:3px solid var(--green);transform:translate(-50%,-50%);z-index:4}
+.runner{height:calc(95px*var(--rsz));display:flex;align-items:center;justify-content:flex-end;padding-right:8px;position:relative;margin-top:4px}
+.runner:before{content:"";position:absolute;left:18%;right:16%;height:45px;border-top:2px solid var(--green);border-radius:50%;transform:rotate(-17deg);filter:drop-shadow(0 0 5px var(--green))}
+.runner:after{content:"";position:absolute;left:22%;right:12%;height:30px;border-top:2px solid var(--line2);border-radius:50%;transform:rotate(-17deg);opacity:.7}
+.runner span{font-size:calc(65px*var(--rsz));position:relative;z-index:1;filter:drop-shadow(0 0 8px var(--green))}
 .battery{display:flex;align-items:center;gap:8px;margin:2px 4px 20px;font-size:25px}
 .bolt{font-size:35px;color:var(--green);filter:drop-shadow(0 0 8px var(--green))}
 .batterybar{display:flex;gap:3px;flex:1;border:2px solid #444;border-radius:8px;padding:3px;height:30px;min-width:0}
 .cell{flex:1;border-radius:3px;background:#252525}.cell:nth-child(1),.cell:nth-child(2){background:#ff2929}.cell:nth-child(3){background:#ff8d20}.cell:nth-child(4){background:#ffd52c}.cell:nth-child(5){background:#a6ff25}.cell:nth-child(6),.cell:nth-child(7){background:#00f65a}
 .lock-area{margin-top:18px}
-.slider{height:76px;border:1px solid #555;border-radius:50px;background:linear-gradient(90deg,#0a2416,#060707 70%);box-shadow:inset 0 0 14px #101010,0 0 12px #00ff5730;position:relative;display:flex;align-items:center;padding:5px;overflow:hidden;touch-action:pan-y}
-.slider:before{content:"";position:absolute;inset:0;border:1px solid #00ff67;border-radius:50px;opacity:.45;pointer-events:none}
+.slider{height:76px;border:1px solid #555;border-radius:50px;background:linear-gradient(90deg,var(--glow),#060707 70%);box-shadow:inset 0 0 14px #101010,0 0 12px var(--glow2);position:relative;display:flex;align-items:center;padding:5px;overflow:hidden;touch-action:pan-y}
+.slider:before{content:"";position:absolute;inset:0;border:1px solid var(--green);border-radius:50px;opacity:.45;pointer-events:none}
 .tracktext{position:absolute;left:92px;right:12px;text-align:center;font-size:14px;line-height:1.35;color:#fff;pointer-events:none}
 .chevrons{color:var(--green);font-size:27px;letter-spacing:1px;font-weight:bold;display:block}
-.knob{height:58px;width:58px;border-radius:50%;background:radial-gradient(circle,#fff 0 55%,#d9e4df 57%,#f8fff9 70%);border:3px solid #9dffbd;box-shadow:0 0 0 4px #00ff6733,0 0 18px #00ff67;display:grid;place-items:center;flex-shrink:0;z-index:2;cursor:grab;touch-action:none;color:#101514;font-size:27px;user-select:none}
+.knob{height:58px;width:58px;border-radius:50%;background:radial-gradient(circle,#fff 0 55%,#d9e4df 57%,#f8fff9 70%);border:3px solid var(--green);box-shadow:0 0 0 4px var(--glow),0 0 18px var(--green);display:grid;place-items:center;flex-shrink:0;z-index:2;cursor:grab;touch-action:none;color:#101514;font-size:27px;user-select:none}
 .knob:active{cursor:grabbing}
-.lock-area.unlocked .slider{border-color:var(--green);box-shadow:0 0 22px #00ff6770}
+.lock-area.unlocked .slider{border-color:var(--green);box-shadow:0 0 22px var(--green)}
 .lock-area.unlocked .tracktext{color:var(--green)}
 .status{text-align:center;margin-top:14px;font-size:14px;color:#ddd;min-height:20px}
 .homebar{position:absolute;bottom:13px;left:50%;transform:translateX(-50%);width:108px;height:5px;border-radius:9px;background:#aaa}
 .hint{text-align:center;font-size:12px;color:#8e9993;margin-top:12px}
 @media(max-height:700px){.phone{min-height:0;padding-top:15px}.runner{height:65px}.sun{height:48px}.lock-area{margin-top:10px}.battery{margin-bottom:10px}}
+
+.cell.off{background:#1c1f1f!important;box-shadow:none}
+.cell{box-shadow:inset 0 1px 0 #ffffff55,inset 0 -2px 0 #0006}
+#fx{position:absolute;inset:0;pointer-events:none;z-index:0}
+.phone>*:not(#fx):not(.sheet){position:relative;z-index:1}
+.gear{position:absolute!important;bottom:22px;right:18px;z-index:5!important;width:40px;height:40px;border-radius:50%;border:1px solid #6b5a2c;background:radial-gradient(circle at 35% 30%,#fff3c4,#d9a93f 45%,#7a5414 100%);box-shadow:0 3px 6px #000c,inset 0 1px 1px #fff8,inset 0 -2px 3px #0007,0 0 10px var(--glow);display:grid;place-items:center;font-size:20px;color:#3a2606;cursor:pointer;padding:0}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:10;background:linear-gradient(#141a19,#070909);border-top:1px solid #3c4442;border-radius:26px 26px 0 0;padding:18px 18px 30px;box-shadow:0 -10px 30px #000;transform:translateY(105%);transition:transform .3s ease}
+.sheet.open{transform:none}
+.sheet h3{margin:0 0 14px;font-size:20px;display:flex;justify-content:space-between;align-items:center}
+.sheet h3 button{background:#222;border:1px solid #444;color:#fff;border-radius:50%;width:34px;height:34px;font-size:16px}
+.row{margin-bottom:16px}
+.row label{display:flex;justify-content:space-between;font-size:15px;font-weight:bold;margin-bottom:8px}
+.row input[type=range]{width:100%;accent-color:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{flex:1 1 0;min-width:0;white-space:nowrap;padding:10px 4px;border-radius:14px;border:1px solid #3a4240;background:linear-gradient(#232a29,#101414);color:#fff;font-size:13px;font-weight:bold;box-shadow:inset 0 1px 0 #ffffff22,0 2px 4px #000a}
+.chip.on{border-color:var(--green);box-shadow:inset 0 1px 0 #ffffff33,0 0 12px var(--glow),0 0 0 1px var(--green)}
+.chip i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+.reset{width:100%;padding:12px;border-radius:14px;border:1px solid #6b2a2a;background:linear-gradient(#3a1515,#1a0909);color:#ffb3b3;font-weight:bold;font-size:14px;box-shadow:0 0 10px #ff2b2b33}
+@media(max-width:500px){body{padding:0;display:block}.phone{width:100%;min-height:100vh;border:none;border-radius:0;box-shadow:none}.homebar{display:none}}
 </style>
 </head>
 <body>
@@ -74,6 +93,16 @@ body{margin:0;min-height:100vh;background:#101414;color:#fff;font-family:Arial,H
     <div class="status" id="status">Sağa kaydırarak kilidi açın</div>
     <div class="hint">Demo ekranı · Gerçek telefon kilidini değiştirmez</div>
   </section>
+  <canvas id="fx"></canvas>
+  <button class="gear" id="gearBtn" aria-label="Ayarlar">⚙</button>
+  <section class="sheet" id="sheet" aria-label="Ayarlar">
+    <h3>Ayarlar <button id="closeBtn" aria-label="Kapat">✕</button></h3>
+    <div class="row"><label>Saat boyutu <span id="cszV"></span></label><input type="range" id="csz" min="70" max="130" step="5"></div>
+    <div class="row"><label>Koşan adam boyutu <span id="rszV"></span></label><input type="range" id="rsz" min="50" max="150" step="5"></div>
+    <div class="row"><label>Renk teması</label><div class="chips" id="themes"></div></div>
+    <div class="row"><label>Hava efekti</label><div class="chips" id="effects"></div></div>
+    <button class="reset" id="resetBtn">Varsayılana dön</button>
+  </section>
   <div class="homebar"></div>
 </main>
 <script>
@@ -97,6 +126,52 @@ knob.addEventListener('pointerdown',e=>{if(unlocked){unlocked=false;area.classLi
 knob.addEventListener('pointermove',e=>{if(dragging)setOffset(e.clientX-startX);});
 knob.addEventListener('pointerup',finish);knob.addEventListener('pointercancel',finish);
 knob.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();setOffset(offset+24);}if(e.key==='Enter'||e.key===' '){e.preventDefault();const max=slider.clientWidth-knob.offsetWidth-10;if(offset>max*.5){setOffset(max);unlocked=true;area.classList.add('unlocked');knob.textContent='🔓';$('sliderLabel').textContent='KİLİT AÇILDI';$('status').textContent='✓ Demo kilidi açıldı';}else setOffset(0);}});
+
+/* ---- Ayarlar ---- */
+const THEMES={yesil:['Yeşil','#00ff67','#00d6ff'],mavi:['Mavi','#00c8ff','#7a8cff'],mor:['Mor','#c56bff','#ff5fd2'],altin:['Altın','#ffc93c','#ff8b22'],kirmizi:['Kırmızı','#ff3b4e','#ff9a3c']};
+const EFFECTS={yok:'Kapalı',yagmur:'🌧 Yağmur',kar:'❄ Kar',yildiz:'✨ Yıldız'};
+const DEF={csz:100,rsz:100,theme:'yesil',fx:'yok'};
+let ST=Object.assign({},DEF);
+try{Object.assign(ST,JSON.parse(localStorage.getItem('nkAyar')||'{}'));}catch(e){}
+const save=()=>{try{localStorage.setItem('nkAyar',JSON.stringify(ST));}catch(e){}};
+const root=document.documentElement.style;
+function hexA(h,a){return h+a;}
+function apply(){
+  root.setProperty('--csz',ST.csz/100);root.setProperty('--rsz',ST.rsz/100);
+  const t=THEMES[ST.theme]||THEMES.yesil;
+  root.setProperty('--green',t[1]);root.setProperty('--line2',t[2]);
+  root.setProperty('--glow',hexA(t[1],'33'));root.setProperty('--glow2',hexA(t[1],'30'));
+  $('csz').value=ST.csz;$('cszV').textContent='%'+ST.csz;$('rsz').value=ST.rsz;$('rszV').textContent='%'+ST.rsz;
+  document.querySelectorAll('#themes .chip').forEach(c=>c.classList.toggle('on',c.dataset.k===ST.theme));
+  document.querySelectorAll('#effects .chip').forEach(c=>c.classList.toggle('on',c.dataset.k===ST.fx));
+  startFx();
+}
+for(const k in THEMES){const b=document.createElement('button');b.className='chip';b.dataset.k=k;b.innerHTML=`<i style="background:${THEMES[k][1]};box-shadow:0 0 6px ${THEMES[k][1]}"></i>${THEMES[k][0]}`;b.onclick=()=>{ST.theme=k;save();apply();};$('themes').appendChild(b);}
+for(const k in EFFECTS){const b=document.createElement('button');b.className='chip';b.dataset.k=k;b.textContent=EFFECTS[k];b.onclick=()=>{ST.fx=k;save();apply();};$('effects').appendChild(b);}
+$('csz').oninput=e=>{ST.csz=+e.target.value;save();apply();};
+$('rsz').oninput=e=>{ST.rsz=+e.target.value;save();apply();};
+$('gearBtn').onclick=()=>$('sheet').classList.add('open');
+$('closeBtn').onclick=()=>$('sheet').classList.remove('open');
+$('resetBtn').onclick=()=>{ST=Object.assign({},DEF);save();apply();};
+
+/* ---- Pil çubuğu gerçek seviyeyi göstersin ---- */
+function cells(){const n=parseInt($('batteryPercent').textContent)||0;const all=document.querySelectorAll('.batterybar .cell');const on=Math.ceil(n/100*all.length);all.forEach((c,i)=>c.classList.toggle('off',i>=on));}
+new MutationObserver(cells).observe($('batteryPercent'),{childList:true,characterData:true,subtree:true});cells();
+
+/* ---- Hava efektleri ---- */
+const cv=$('fx'),cx=cv.getContext('2d');let parts=[],raf=0;
+function size(){const r=cv.parentElement.getBoundingClientRect();cv.width=r.width*devicePixelRatio;cv.height=r.height*devicePixelRatio;}
+function startFx(){cancelAnimationFrame(raf);size();cx.clearRect(0,0,cv.width,cv.height);parts=[];if(ST.fx==='yok')return;
+  const W=cv.width,H=cv.height,d=devicePixelRatio,n=ST.fx==='yagmur'?90:ST.fx==='kar'?70:60;
+  for(let i=0;i<n;i++)parts.push({x:Math.random()*W,y:Math.random()*H,v:(ST.fx==='yagmur'?9+Math.random()*6:0.6+Math.random()*1.4)*d,r:(0.8+Math.random()*2)*d,p:Math.random()*6.28});
+  const col=getComputedStyle(document.documentElement).getPropertyValue('--green').trim();
+  (function loop(){cx.clearRect(0,0,W,H);for(const q of parts){
+    if(ST.fx==='yagmur'){cx.strokeStyle=col+'88';cx.lineWidth=d;cx.beginPath();cx.moveTo(q.x,q.y);cx.lineTo(q.x-2*d,q.y+12*d);cx.stroke();q.y+=q.v;q.x-=q.v*.15;if(q.y>H){q.y=-20;q.x=Math.random()*W*1.1;}}
+    else if(ST.fx==='kar'){cx.fillStyle='#ffffffcc';cx.beginPath();cx.arc(q.x,q.y,q.r,0,6.28);cx.fill();q.y+=q.v;q.p+=.02;q.x+=Math.sin(q.p)*.6*d;if(q.y>H){q.y=-5;q.x=Math.random()*W;}}
+    else{q.p+=.04;cx.globalAlpha=.25+.75*Math.abs(Math.sin(q.p));cx.fillStyle=col;cx.shadowColor=col;cx.shadowBlur=6*d;cx.beginPath();cx.arc(q.x,q.y,q.r*.8,0,6.28);cx.fill();cx.globalAlpha=1;cx.shadowBlur=0;}
+  }raf=requestAnimationFrame(loop);})();}
+addEventListener('resize',()=>startFx());
+apply();
 </script>
 </body>
 </html>
