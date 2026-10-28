@@ -1,0 +1,37 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <!-- koyu deri zemin -->
+    <path android:pathData="M10,2h28a8,8 0 0 1 8,8v28a8,8 0 0 1 -8,8h-28a8,8 0 0 1 -8,-8v-28a8,8 0 0 1 8,-8z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="radial" android:centerX="20" android:centerY="16" android:gradientRadius="34"
+                android:startColor="#2A2320" android:endColor="#0B0908"/>
+        </aapt:attr>
+    </path>
+    <!-- gölge -->
+    <path android:fillColor="#66000000" android:pathData="M15,23.5h19a2.5,2.5 0 0 1 2.5,2.5v12a2.5,2.5 0 0 1 -2.5,2.5h-19a2.5,2.5 0 0 1 -2.5,-2.5v-12a2.5,2.5 0 0 1 2.5,-2.5z"/>
+    <!-- gümüş kilit kolu -->
+    <path android:strokeWidth="3.2" android:strokeLineCap="round" android:fillColor="#00000000"
+        android:pathData="M17.5,22v-4a6.5,6.5 0 0 1 13,0v4">
+        <aapt:attr name="android:strokeColor">
+            <gradient android:type="linear" android:startX="17" android:startY="11" android:endX="31" android:endY="22"
+                android:startColor="#F2F2F2" android:endColor="#8E8E8E"/>
+        </aapt:attr>
+    </path>
+    <!-- pirinç gövde -->
+    <path android:pathData="M14,21.5h20a2.5,2.5 0 0 1 2.5,2.5v12a2.5,2.5 0 0 1 -2.5,2.5h-20a2.5,2.5 0 0 1 -2.5,-2.5v-12a2.5,2.5 0 0 1 2.5,-2.5z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="12" android:startY="21" android:endX="36" android:endY="39">
+                <item android:offset="0" android:color="#FFF1B8"/>
+                <item android:offset="0.35" android:color="#E2B551"/>
+                <item android:offset="0.75" android:color="#A8741F"/>
+                <item android:offset="1" android:color="#6E4A12"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- üst parlama -->
+    <path android:fillColor="#55FFFFFF" android:pathData="M14,22.3h20a1.7,1.7 0 0 1 1.7,1.7v0.8h-23.4v-0.8a1.7,1.7 0 0 1 1.7,-1.7z"/>
+    <!-- anahtar deliği -->
+    <path android:fillColor="#3A2508" android:pathData="M24,27.2a2.2,2.2 0 1 1 -0.01,0zM23,29h2l0.6,4.6h-3.2z"/>
+</vector>
