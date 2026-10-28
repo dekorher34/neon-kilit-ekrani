@@ -17,7 +17,9 @@ jobs:
       - name: Sayfayı uygulamaya kopyala
         run: cp neon_kilit_ekrani.html app/src/main/assets/index.html
       - name: APK derle
-        run: gradle :app:assembleDebug --no-daemon
+        run: |
+          set -o pipefail
+          gradle :app:assembleDebug --no-daemon 2>&1 | tee derleme.log || { grep -E "error|What went wrong|wrong:|Exception|> " derleme.log | head -25 | while IFS= read -r l; do echo "::error::$l"; done; exit 1; }
       - name: APK'yı adlandır
         run: cp app/build/outputs/apk/debug/app-debug.apk NeonKilitEkrani.apk
       - uses: softprops/action-gh-release@v2
