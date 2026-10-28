@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050707">
+<title>Neon Kilit Ekranı</title>
+<style>
+:root{--green:#00ff67;--cyan:#00c8ff;--orange:#ff8b22;--bg:#030505}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#101414;color:#fff;font-family:Arial,Helvetica,sans-serif;display:grid;place-items:center;padding:12px}
+.phone{width:min(100%,410px);min-height:min(860px,96vh);border:3px solid #343a3a;border-radius:38px;background:radial-gradient(ellipse at 75% 15%,#07130c 0,transparent 28%),linear-gradient(#020303,#050707 65%,#000);box-shadow:0 0 0 3px #090b0b,0 18px 55px #000;position:relative;overflow:hidden;padding:24px 20px 42px}
+.top{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:8px}
+.weather{text-align:center;min-width:0}
+.sun{font-size:47px;filter:drop-shadow(0 0 12px #ffb02e);height:58px}
+.temp{font-size:18px;margin-top:2px}
+.digital{font-size:clamp(36px,10vw,51px);font-weight:800;letter-spacing:-2px;white-space:nowrap;margin-top:5px}
+.orange{color:var(--orange)}.blue{color:var(--cyan)}
+.date{font-size:14px;color:#ddd;white-space:nowrap;margin-top:2px}
+.date span{color:#20d9c6}
+.clock{width:100%;max-width:190px;aspect-ratio:1;border-radius:50%;border:2px solid #59605e;position:relative;margin:auto;background:radial-gradient(circle,#050707 60%,#101615 61%,#000 70%);box-shadow:0 0 15px #101a14}
+.ring{position:absolute;inset:-7px;border-radius:50%;background:conic-gradient(from -8deg,#00ff53 0 75deg,#222 75deg 93deg,#f7d82e 93deg 145deg,#ff8d22 145deg 190deg,#ff2b2b 190deg 245deg,#282828 245deg 270deg,#00ff53 270deg 360deg);z-index:0;mask:radial-gradient(farthest-side,transparent calc(100% - 8px),#000 calc(100% - 7px))}
+.clock:before{content:"";position:absolute;inset:8px;border-radius:50%;border:1px solid #555}
+.num{position:absolute;font-size:14px;font-weight:bold;transform:translate(-50%,-50%)}
+.hand{position:absolute;left:50%;bottom:50%;transform-origin:50% 100%;border-radius:5px;z-index:2}
+.hour{height:28%;width:4px;background:#e8fff2;box-shadow:0 0 3px var(--green)}
+.minute{height:37%;width:3px;background:#e8fff2;box-shadow:0 0 4px var(--green)}
+.second{height:42%;width:1px;background:#ff334b}
+.pin{position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:50%;background:#111;border:3px solid #65ffa3;transform:translate(-50%,-50%);z-index:4}
+.runner{height:95px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;position:relative;margin-top:4px}
+.runner:before{content:"";position:absolute;left:18%;right:16%;height:45px;border-top:2px solid #00ffb0;border-radius:50%;transform:rotate(-17deg);filter:drop-shadow(0 0 5px #00ff9d)}
+.runner:after{content:"";position:absolute;left:22%;right:12%;height:30px;border-top:2px solid #00d6ff;border-radius:50%;transform:rotate(-17deg);opacity:.7}
+.runner span{font-size:65px;position:relative;z-index:1;filter:drop-shadow(0 0 8px #00ff89)}
+.battery{display:flex;align-items:center;gap:8px;margin:2px 4px 20px;font-size:25px}
+.bolt{font-size:35px;color:var(--green);filter:drop-shadow(0 0 8px var(--green))}
+.batterybar{display:flex;gap:3px;flex:1;border:2px solid #444;border-radius:8px;padding:3px;height:30px;min-width:0}
+.cell{flex:1;border-radius:3px;background:#252525}.cell:nth-child(1),.cell:nth-child(2){background:#ff2929}.cell:nth-child(3){background:#ff8d20}.cell:nth-child(4){background:#ffd52c}.cell:nth-child(5){background:#a6ff25}.cell:nth-child(6),.cell:nth-child(7){background:#00f65a}
+.lock-area{margin-top:18px}
+.slider{height:76px;border:1px solid #555;border-radius:50px;background:linear-gradient(90deg,#0a2416,#060707 70%);box-shadow:inset 0 0 14px #101010,0 0 12px #00ff5730;position:relative;display:flex;align-items:center;padding:5px;overflow:hidden;touch-action:pan-y}
+.slider:before{content:"";position:absolute;inset:0;border:1px solid #00ff67;border-radius:50px;opacity:.45;pointer-events:none}
+.tracktext{position:absolute;left:92px;right:12px;text-align:center;font-size:14px;line-height:1.35;color:#fff;pointer-events:none}
+.chevrons{color:var(--green);font-size:27px;letter-spacing:1px;font-weight:bold;display:block}
+.knob{height:58px;width:58px;border-radius:50%;background:radial-gradient(circle,#fff 0 55%,#d9e4df 57%,#f8fff9 70%);border:3px solid #9dffbd;box-shadow:0 0 0 4px #00ff6733,0 0 18px #00ff67;display:grid;place-items:center;flex-shrink:0;z-index:2;cursor:grab;touch-action:none;color:#101514;font-size:27px;user-select:none}
+.knob:active{cursor:grabbing}
+.lock-area.unlocked .slider{border-color:var(--green);box-shadow:0 0 22px #00ff6770}
+.lock-area.unlocked .tracktext{color:var(--green)}
+.status{text-align:center;margin-top:14px;font-size:14px;color:#ddd;min-height:20px}
+.homebar{position:absolute;bottom:13px;left:50%;transform:translateX(-50%);width:108px;height:5px;border-radius:9px;background:#aaa}
+.hint{text-align:center;font-size:12px;color:#8e9993;margin-top:12px}
+@media(max-height:700px){.phone{min-height:0;padding-top:15px}.runner{height:65px}.sun{height:48px}.lock-area{margin-top:10px}.battery{margin-bottom:10px}}
+</style>
+</head>
+<body>
+<main class="phone" aria-label="Neon kilit ekranı örneği">
+  <section class="top">
+    <div class="weather">
+      <div class="sun" aria-hidden="true">🌤️</div>
+      <div class="temp" id="temp">17°C</div>
+      <div class="digital"><span class="orange" id="hours">09</span><span>:</span><span class="blue" id="minutes">22</span></div>
+      <div class="date" id="date">Pazartesi, <span>28 Ekim</span></div>
+    </div>
+    <div class="clock" id="clock" aria-label="Analog saat">
+      <div class="ring"></div>
+      <div class="hand hour" id="hourHand"></div><div class="hand minute" id="minuteHand"></div><div class="hand second" id="secondHand"></div><div class="pin"></div>
+    </div>
+  </section>
+  <div class="runner" aria-hidden="true"><span>🏃🏻‍♂️</span></div>
+  <div class="battery"><span class="bolt">ϟ</span><span id="batteryPercent">70%</span><div class="batterybar" aria-label="Pil göstergesi"><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i></div></div>
+  <section class="lock-area" id="lockArea">
+    <div class="slider" id="slider">
+      <div class="knob" id="knob" role="slider" tabindex="0" aria-label="Kilidi açmak için sağa kaydır" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">🔒</div>
+      <div class="tracktext"><span class="chevrons">››››</span><span id="sliderLabel">Kilidi açmak için sağa kaydırın</span></div>
+    </div>
+    <div class="status" id="status">Sağa kaydırarak kilidi açın</div>
+    <div class="hint">Demo ekranı · Gerçek telefon kilidini değiştirmez</div>
+  </section>
+  <div class="homebar"></div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const trDate=new Intl.DateTimeFormat('tr-TR',{weekday:'long',day:'numeric',month:'long'});
+function updateClock(){
+  const d=new Date(),h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();
+  $('hours').textContent=String(h).padStart(2,'0');$('minutes').textContent=String(m).padStart(2,'0');
+  const parts=trDate.formatToParts(d), weekday=parts.find(p=>p.type==='weekday')?.value||'',day=parts.find(p=>p.type==='day')?.value||'',month=parts.find(p=>p.type==='month')?.value||'';
+  $('date').innerHTML=`${weekday.charAt(0).toLocaleUpperCase('tr-TR')+weekday.slice(1)}, <span>${day} ${month}</span>`;
+  $('hourHand').style.transform=`translateX(-50%) rotate(${(h%12)*30+m*.5}deg)`;
+  $('minuteHand').style.transform=`translateX(-50%) rotate(${m*6+s*.1}deg)`;
+  $('secondHand').style.transform=`translateX(-50%) rotate(${s*6}deg)`;
+}
+updateClock();setInterval(updateClock,1000);
+if('getBattery' in navigator){navigator.getBattery().then(b=>{const show=()=>{$('batteryPercent').textContent=Math.round(b.level*100)+'%';};show();b.addEventListener('levelchange',show);}).catch(()=>{});}
+const slider=$('slider'),knob=$('knob'),area=$('lockArea');let startX=0,offset=0,dragging=false,unlocked=false;
+function setOffset(x){const max=slider.clientWidth-knob.offsetWidth-10;offset=Math.max(0,Math.min(max,x));knob.style.transform=`translateX(${offset}px)`;knob.setAttribute('aria-valuenow',String(Math.round(offset/max*100)));if(offset>max*.5)$('sliderLabel').textContent='Bırakınca açılır';else $('sliderLabel').textContent='Kilidi açmak için sağa kaydırın';}
+function finish(){if(!dragging)return;dragging=false;const max=slider.clientWidth-knob.offsetWidth-10;if(offset>max*.72){setOffset(max);unlocked=true;area.classList.add('unlocked');knob.textContent='🔓';$('sliderLabel').textContent='KİLİT AÇILDI';$('status').textContent='✓ Demo kilidi açıldı';}else{setOffset(0);}}
+knob.addEventListener('pointerdown',e=>{if(unlocked){unlocked=false;area.classList.remove('unlocked');knob.textContent='🔒';$('status').textContent='Sağa kaydırarak kilidi açın';$('sliderLabel').textContent='Kilidi açmak için sağa kaydırın';setOffset(0);}dragging=true;startX=e.clientX-offset;knob.setPointerCapture(e.pointerId);});
+knob.addEventListener('pointermove',e=>{if(dragging)setOffset(e.clientX-startX);});
+knob.addEventListener('pointerup',finish);knob.addEventListener('pointercancel',finish);
+knob.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();setOffset(offset+24);}if(e.key==='Enter'||e.key===' '){e.preventDefault();const max=slider.clientWidth-knob.offsetWidth-10;if(offset>max*.5){setOffset(max);unlocked=true;area.classList.add('unlocked');knob.textContent='🔓';$('sliderLabel').textContent='KİLİT AÇILDI';$('status').textContent='✓ Demo kilidi açıldı';}else setOffset(0);}});
+</script>
+</body>
+</html>
