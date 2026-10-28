@@ -9,5 +9,9 @@ android {
         versionCode Integer.parseInt(System.getenv('GITHUB_RUN_NUMBER') ?: '1')
         versionName "1.0." + (System.getenv('GITHUB_RUN_NUMBER') ?: '1')
     }
+    signingConfigs {
+        sabit { storeFile file('../imza.jks'); storePassword 'dekorher'; keyAlias 'neonkilit'; keyPassword 'dekorher' }
+    }
+    buildTypes { debug { signingConfig signingConfigs.sabit } }
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
 }
